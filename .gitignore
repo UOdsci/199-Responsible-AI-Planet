@@ -47,3 +47,11 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+# Quarto output and local artifacts
+/.quarto/
+/_freeze/
+/_site/
+**/*.quarto_ipynb
+.DS_Store
+~$*

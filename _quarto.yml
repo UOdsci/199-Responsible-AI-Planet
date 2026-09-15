@@ -1,0 +1,36 @@
+project:
+  type: website
+  output-dir: docs
+  resources:
+    - assets/**
+
+website:
+  title: "DSCI 199"
+  site-url: "https://chchang47.github.io/199-Responsible-AI-Planet/"
+  description: "Responsible Use of AI for Planetary Futures"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Syllabus
+    right:
+      - icon: github
+        href: "https://github.com/chchang47/199-Responsible-AI-Planet"
+        aria-label: GitHub repository
+  page-footer:
+    left: "DSCI 199 · Responsible Use of AI for Planetary Futures"
+    right: "Built with [Quarto](https://quarto.org/)"
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+    toc-location: right
+    toc-title: On this page
+    smooth-scroll: true
+    link-external-newwindow: true
+    code-copy: true
+    anchor-sections: true
+
+execute:
+  freeze: auto
