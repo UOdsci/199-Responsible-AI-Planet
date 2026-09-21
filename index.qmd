@@ -1,0 +1,264 @@
+---
+pagetitle: "Responsible Use of AI for Planetary Futures · DSCI 199"
+description: "An introductory data science seminar about who builds AI, what it costs the planet, and how we might use it responsibly."
+page-layout: full
+toc: true
+---
+
+::: {.course-hero role="region" aria-label="Course introduction"}
+::: {.hero-content}
+<p class="course-kicker">DSCI 199 · Responsible AI</p>
+
+# Responsible Use of AI for Planetary Futures
+
+AI can help us better monitor, manage, and protect a changing planet. But AI creates new challenges for environmental sustainability and the conservation workforce.
+
+<a class="hero-link" href="#course-at-a-glance">Explore the syllabus <span aria-hidden="true">→</span></a>
+:::
+:::
+
+::: {.course-facts #course-at-a-glance}
+::: {.fact}
+<span>Format</span>
+
+Discussions, lectures, group work
+:::
+::: {.fact}
+<span>Experience</span>
+
+No coding required
+:::
+::: {.fact}
+<span>Term</span>
+
+Fall 2026
+:::
+::: {.fact}
+<span>Instructor</span>
+
+[Charlotte Chang](https://chang.eco)
+:::
+:::
+
+::: {.page-shell}
+
+## What is this course about?
+
+Artificial intelligence is transforming how people monitor and map biodiversity, and how we make environmental decisions. At the same time, AI systems can require copious amounts of energy, water, minerals, labor, and data. AI systems can widen access to knowledge but deepen inequity.
+
+In this class, we will ask a deceptively simple question: **what would it mean to use AI responsibly on a living planet?** This is a fast-moving field where **students can and should have a voice on how these systems impact our shared commons and future**; there are no right answers, and we are going to collectively learn about the fundamentals of AI systems, examine environmental applications, investigate ethical and social concerns, and proactively think through what responsible use and governance would look like. Our goal is to help model for the conservation sector what it would look like to make better decisions with AI together.
+
+You do not need prior experience in data science, computer science, or environmental studies. Bring your questions, your perspective, and a willingness to take leadership over your own learning journey!
+
+::: {.question-grid}
+::: {.question-item}
+### What does AI actually “know”?
+
+We will unpack how models learn from data, where uncertainty enters, and why outputs can sound more certain than the evidence allows.
+:::
+::: {.question-item}
+### What does intelligence cost?
+
+We will follow the material life of AI through electricity, water, mining, and other environmental concerns.
+:::
+::: {.question-item}
+### Who gets to decide?
+
+We will examine power, participation, Indigenous data sovereignty, governance, and the communities affected by automated decisions.
+:::
+::: {.question-item}
+### Can AI serve a thriving planet?
+
+We will imagine uses shaped by ecological limits, justice, and public purpose.
+:::
+:::
+
+## Learning goals
+
+By the end of the course, a successful learner will be able to:
+
+1. **Explain** foundational ideas about AI in clear language.
+2. **Trace** the environmental and social impacts of an AI system across its life cycle.
+3. **Evaluate** claims about AI for climate, conservation, and sustainability using evidence rather than hype.
+4. **Identify** whose knowledge, labor, and interests are represented or excluded in an AI-enabled decision.
+5. **Communicate** a practical governance recommendation to a real-world audience.
+
+## How we will learn
+
+Class meetings mix short lectures, discussions based on close reading (student participation is an **essential** part of this class!), small-group inquiry (you all are the AI and conservation workforce of the future), structured debate, and hands-on investigations. Some weeks we will inspect datasets or interact with AI systems, but this is not a programming course. The emphasis is on asking better questions of technical systems and thinking through what responsible choices would entail.
+
+::: {.project-feature}
+<p class="section-label">Signature group project</p>
+
+### An AI governance field guide for conservation
+
+Teams will examine how environmental and conservation organizations describe responsible and generative AI use. You will compare policies, identify important gaps, and develop a concise, usable field guide for an organization considering AI in its work. Ideally, the field guide will focus on a practical need in environmental conservation.
+:::
+
+## Course Schedule
+
+Please note that this schedule is subject to change; this syllabus is very much a *living document* that will change to reflect the unique conditions of this semester. I reserve the right to exercise some flexibility in scheduling, usually in favor of giving more time to students.
+
+```{r, echo=F, warning=F, message=F}
+library(dplyr)
+library(googlesheets4)
+library(htmlTable)
+library(knitr)
+library(flextable)
+
+## Pull in Google sheet schedule
+schedDF <- googlesheets4::read_sheet("https://docs.google.com/spreadsheets/d/17oGy_xrOWR1F4IXSx_7DiiAAqqY4mK-ritN02o245zo/edit?usp=sharing",sheet = "schedule",col_types="ccc")
+
+## Convert Markdown links from Google Sheets to HTML links
+  markdown_links_to_html <- function(x) {
+    ifelse(
+      is.na(x),
+      NA_character_,
+      gsub(
+        "\\[([^]]+)\\]\\((https?://[^)]+)\\)",
+        '<a href="\\2" target="_blank" rel="noopener noreferrer">\\1</a>',
+        x,
+        perl = TRUE
+      )
+    )
+  }
+
+ schedDF <- schedDF %>%
+  mutate(Readings = markdown_links_to_html(Readings))
+
+ ## Hack-y workaround to do zebra banding color automagically (based on NA values)
+zebra_cols <- rep("none",dim(schedDF)[1])
+zebra_cols[which(is.na(schedDF$Topic))] <- "#adc2d8"
+
+#ft <- flextable(schedDF)
+#ft <- theme_vanilla(ft)
+#ft
+
+schedDF$Week[1] <- "1  "
+
+schedDF %>% 
+  addHtmlTableStyle(col.rgroup = zebra_cols,
+                    align = "ccc",
+                    css.cell = "border-bottom: solid 0.5px",
+                    css.cgroup=c("width: 1000px;","width: 100px;","width: 300px;")) %>% # doesn't make a difference! must be getting overridden by knitr.
+  htmlTable(rnames=FALSE, escape.html = FALSE) # can't figure out for now how to merge cells - whatever
+```
+
+## Work and feedback
+
+This seminar rewards preparation, curiosity, and care for the learning community. You will receive--and provide--feedback throughout the term.
+
+| Component | What it develops | Weight |
+|---|---|---:|
+| Homework (5 assignments) | Foundational understanding of AI systems, their footprint, ethics, and governance | 25% (5% each) |
+| Participation and weekly project accountability | Preparation, collaborative sensemaking, and steady progress toward your group's field guide | 25% |
+| Assessments | Individual grasp of the core concepts from the course | 25% |
+| Group AI governance field guide and briefing | Synthesis of the term's work for a real-world audience | 25% |
+
+Specific prompts, criteria, and rubrics will be shared well before each deadline.
+
+**Weekly project accountability.** Your participation grade is not just about talking in class. Each week your team will log a small, concrete step toward the group field guide (a source found, a policy compared, a section drafted, a decision made). These weekly check-ins keep the major project moving and give everyone a visible, low-stakes way to contribute. A range of participation counts--speaking in full-group and small-group discussion and your weekly project contributions--so there is more than one way to show up well.
+
+### Grading scale
+
+Final letter grades are assigned on the standard University of Oregon scale:
+
+| Grade | Range | | Grade | Range |
+|---|---|---|---|---|
+| A  | 93--100% | | C  | 73--76% |
+| A− | 90--92%  | | C− | 70--72% |
+| B+ | 87--89%  | | D+ | 67--69% |
+| B  | 83--86%  | | D  | 63--66% |
+| B− | 80--82%  | | D− | 60--62% |
+| C+ | 77--79%  | | F  | below 60% |
+
+Grading criteria and rubrics for each assignment will be posted. More on UO grades, including the pass/no-pass option, is available on the [Registrar's grading system page](https://registrar.uoregon.edu/current-students/grading-system).
+
+### Deadlines and late work
+
+Assignments are due at the times listed. Late submissions will result in a grade penalty (one letter grade deduction per day late). But, I have built in some flexibility so a hard week does not derail you:
+
+- Each student has **one "grace" extension**--turn in a homework up to a week late, for any reason, no need to explain. (These do not apply to course assessments, or the group briefing, which are tied to fixed class dates.)
+- Your **lowest homework score is adjusted**. At the end of the term, I will drop the lowest scoring *question* on the lowest scoring homework for all students and increase your score accordingly. 
+
+Late work will receive reduced and/or delayed feedback because we will have moved on to new material. If you find yourself falling behind, reach out early. **I would much rather plan a path forward with you proactively**.
+
+## Our AI practice
+
+Because responsible AI use is the subject of the course, we will sometimes use AI tools deliberately—and sometimes set them aside. Each assignment will name an **AI use level**:
+
+| Level | Expectation |
+|---|---|
+| **Observe** | Do not use generative AI; the purpose is to notice your own reasoning or build a foundational skill. |
+| **Consult** | Use AI for limited support such as brainstorming or critique, then verify, revise, and disclose what you used. |
+| **Collaborate** | AI use is part of the task; you will note down your interactions with the model and log its traces. |
+
+In every case, you remain responsible for claims, citations, decisions, and submitted work. We will develop our shared disclosure practice in the first weeks and revisit it together.
+
+## Attendance and engagement
+
+Because this is a discussion seminar, our learning happens together, in the room. Your presence and preparation are the engine of the course, which is why participation and weekly project accountability count toward your grade.
+
+You may miss up to **two class meetings** this term for any reason, no explanation needed. I do not distinguish between "excused" and "unexcused" absences--there is no fair way to verify anyone's reasons--so these are yours to use as you see fit, whether you are ill, overwhelmed, or simply need a day. Please save them for when you truly need them. (As in all UO courses, absences for religious observances, [AEC](https://aec.uoregon.edu/)-approved accommodations, military service, and University-sponsored events are handled separately and do not count against this total; let me know as early as you can, and at least a week ahead when the absence is planned.)
+
+If you are feeling ill, please stay home, rest, and use one of your absences. Protecting your classmates (and your own health!) matters more than perfect attendance.
+
+Students who miss **three or more** meetings will not earn full participation credit, and in cases of extensive absence **may fail the course**. If something in your life is making attendance hard, please reach out. I would much rather build a plan with you early. **Your success genuinely matters to me**, and our learning community.
+
+## Learning together
+
+The questions in this course do not have purely technical answers. Our classroom will include different experiences, values, and levels of confidence with both technology and environmental issues. We will critique ideas and systems without dismissing people; make room for uncertainty; explain unfamiliar terms; and treat changing one’s mind as evidence of learning.
+
+All of us in this class--including me--can expect one another to:
+
+- **Participate and contribute.** Come prepared, follow the plan for the day, and engage thoughtfully. Participation is not limited to talking; asking questions, listening closely, building on a classmate's idea, and your weekly work all count.
+- **Expect and respect diversity.** This class welcomes a range of experiences, perspectives, and approaches. We condemn behavior that demeans or marginalizes others on the basis of race, ethnicity, gender, sex, age, sexual orientation, religion, ability, or socioeconomic status. We can disagree with respect and evidence.
+- **Help everyone learn.** We learn from one another, which takes patience, generosity, and openness to feedback. Please ask for help when you need it and offer it when you can.
+- **Hold mutual respect.** We will respect one another, and that also means that we will respect each other's right to privacy. What's shared in class stays in class.
+
+We will develop more specific shared norms together in the first weeks of the term.
+
+If any aspect of the course creates a barrier to your participation, please speak with the instructor. We can work together on access needs, learning conditions, or connections to the appropriate campus resources. You do not need to wait for a problem to become urgent.
+
+## Course details
+
+| | |
+|---|---|
+| **Instructor** | Charlotte H. Chang (you can call me *Prof C or Dr C*; *pronouns:* she/hers) |
+| **Email** | *chchang*@uoregon.edu |
+| **Student hours** | Wednesdays 2-3:15pm at the Science Library or by [bookable Zoom appointment](https://bookings.cloud.microsoft/bookwithme/user/93548d014dc248f79e46cdea69d402dc@uoregon.edu/meetingtype/JR1zuA0gdESsJkIsa_I4Eg2?bookingcode=7989e298-758d-46ff-873d-007d9709db77&anonymous&ismsaljsauthenabled&ep=mlink). Student hours (aka office hours) are a great place to talk through a reading, an assignment, your group project, or where this course connects to your goals--everyone is welcome! This is **your time**! |
+| **Meeting time** | **M/W 4:00-5:20pm** |
+| **Location** | **Straub 145** |
+| **Credits** | *4* credits |
+| **Prerequisites** | None; open to students from all fields |
+| **Materials** | All required readings and media are provided through the course website at no cost. |
+
+
+## Key dates (Fall 2026)
+
+Our term runs on the standard 10-week University of Oregon calendar. A few dates worth putting in your planner now:
+
+| Date | Milestone |
+|---|---|
+| September 28 | Classes begin |
+| October 3 | Last day to drop without a "W" |
+| October 5 | Last day to add via DuckWeb |
+| November 11 | Veterans Day--no class |
+| November 15 | Last day to withdraw from the course |
+| November 26--27 | Thanksgiving--no class |
+| December 4 | Final day of instruction; last day to change grading option (graded or P/N) |
+| December 7--11 | Finals week |
+
+**I believe every student in this class can succeed**. If any of these deadlines sneaks up on you, come talk with me.
+
+## University policies and course accommodations
+
+Please read and make sure you are familiar with the important policies that apply to all UO courses, which can be found at [University Course Policies: a Guide for Students](https://teaching.uoregon.edu/university-course-policies). The University is committed to providing equal opportunities to all students in a learning environment free from discrimination and harassment. Students with disabilities may request accommodations by contacting the [Accessible Education Center (AEC)](https://aec.uoregon.edu/getting-started-0) at [uoaec@uoregon.edu](mailto:uoaec@uoregon.edu) or 541-346-1155. Students in need of accommodations due to pregnancy, military leave, and religious observances should contact the [Office of Equal Opportunity and Access](https://investigations.uoregon.edu/) at [eoa@uoregon.edu](mailto:eoa@uoregon.edu) or 541-326-3123.
+
+::: {.closing-note}
+This syllabus is a living document. Our route may change as new evidence, technologies, and questions emerge, but our overarching goal is to explore this question together:  
+
+**What would it mean to use AI responsibly on a living planet?**
+:::
+
+:::
