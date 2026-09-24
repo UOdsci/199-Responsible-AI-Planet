@@ -107,7 +107,7 @@ library(knitr)
 library(flextable)
 
 ## Pull in Google sheet schedule
-schedDF <- googlesheets4::read_sheet("https://docs.google.com/spreadsheets/d/17oGy_xrOWR1F4IXSx_7DiiAAqqY4mK-ritN02o245zo/edit?usp=sharing",sheet = "schedule",col_types="ccc")
+schedDF <- googlesheets4::read_sheet("https://docs.google.com/spreadsheets/d/17oGy_xrOWR1F4IXSx_7DiiAAqqY4mK-ritN02o245zo/edit?usp=sharing",sheet = "schedule",col_types="ccccc")
 
 ## Convert Markdown links from Google Sheets to HTML links
   markdown_links_to_html <- function(x) {
@@ -124,7 +124,8 @@ schedDF <- googlesheets4::read_sheet("https://docs.google.com/spreadsheets/d/17o
   }
 
  schedDF <- schedDF %>%
-  mutate(Readings = markdown_links_to_html(Readings))
+  mutate(Readings = markdown_links_to_html(Readings),
+         Activities = markdown_links_to_html(Activities))
 
  ## Hack-y workaround to do zebra banding color automagically (based on NA values)
 zebra_cols <- rep("none",dim(schedDF)[1])
@@ -138,7 +139,7 @@ schedDF$Week[1] <- "1  "
 
 schedDF %>% 
   addHtmlTableStyle(col.rgroup = zebra_cols,
-                    align = "ccc",
+                    align = "ccccc",
                     css.cell = "border-bottom: solid 0.5px",
                     css.cgroup=c("width: 1000px;","width: 100px;","width: 300px;")) %>% # doesn't make a difference! must be getting overridden by knitr.
   htmlTable(rnames=FALSE, escape.html = FALSE) # can't figure out for now how to merge cells - whatever
