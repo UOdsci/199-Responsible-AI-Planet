@@ -227,7 +227,7 @@ If any aspect of the course creates a barrier to your participation, please spea
 |---|---|
 | **Instructor** | Charlotte H. Chang (you can call me *Prof C or Dr C*; *pronouns:* she/hers) |
 | **Email** | *chchang*@uoregon.edu |
-| **Student hours** | Wednesdays 2-3:15pm at the Science Library or by [bookable Zoom appointment](https://bookings.cloud.microsoft/bookwithme/user/93548d014dc248f79e46cdea69d402dc@uoregon.edu/meetingtype/JR1zuA0gdESsJkIsa_I4Eg2?bookingcode=7989e298-758d-46ff-873d-007d9709db77&anonymous&ismsaljsauthenabled&ep=mlink). Student hours (aka office hours) are a great place to talk through a reading, an assignment, your group project, or where this course connects to your goals--everyone is welcome! This is **your time**! |
+| **Student hours** | Wednesdays 2-3:15pm at the Science Library or by [bookable Zoom appointment](https://bookings.cloud.microsoft/bookwithme/user/93548d014dc248f79e46cdea69d402dc@uoregon.edu). Student hours (aka office hours) are a great place to talk through a reading, an assignment, your group project, or where this course connects to your goals--everyone is welcome! This is **your time**! |
 | **Meeting time** | **M/W 4:00-5:20pm** |
 | **Location** | **Straub 145** |
 | **Credits** | *4* credits |
